@@ -21,9 +21,9 @@ margins <- bind_rows(model_1, model_2, model_3) %>%
          race_eth = str_replace_all(race_eth, "Non-Hispanic", "Non-Latine"),
          race_eth = ifelse(race_eth == "Hispanic, Any Race", "Latine, Any Race", race_eth),
          model_name = case_when(
-           model == 1 ~ "Model 1: Probability of Moving Each Month",
-           model == 2 ~ "Model 2: Isolation Index",
-           model == 3 ~ "Model 3: Percentage of People in Tract Living in Poverty"
+           model == 1 ~ "Model 1: Monthly Mobility Rate",
+           model == 2 ~ "Model 2: Tract Isolation Index",
+           model == 3 ~ "Model 3: Tract Poverty Rate"
          )) 
 
 Black, White, Asian, Latine, American Indian, Pacific Islander, Multi-Racial.
@@ -70,7 +70,7 @@ model_3_plot <- ggplot(margins %>% filter(str_detect(model, "3")),
   geom_errorbar(width = .5) +
   geom_point() +
   scale_y_continuous(labels = scales::percent) +
-  labs(x = "", y = "\nPredicted Poverty Rate") +
+  labs(x = "", y = "\nPredicted Percentage") +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1,
                                    size = 12))
